@@ -1,4 +1,4 @@
-/* flatpickr v4.6.5-beta, @license MIT */
+/* flatpickr v4.6.6-beta, @license MIT */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -1116,8 +1116,8 @@
         }
         function buildMonthDays(year, month) {
             var firstOfMonth = (new Date(year, month, 1).getDay() - self.l10n.firstDayOfWeek + 7) % 7;
-            var prevMonthDays = self.utils.getDaysInMonth((month - 1 + 12) % 12);
-            var daysInMonth = self.utils.getDaysInMonth(month), days = window.document.createDocumentFragment(), isMultiMonth = self.config.showMonths > 1, prevMonthDayClass = isMultiMonth ? "prevMonthDay hidden" : "prevMonthDay", nextMonthDayClass = isMultiMonth ? "nextMonthDay hidden" : "nextMonthDay";
+            var prevMonthDays = self.utils.getDaysInMonth((month - 1 + 12) % 12, year);
+            var daysInMonth = self.utils.getDaysInMonth(month, year), days = window.document.createDocumentFragment(), isMultiMonth = self.config.showMonths > 1, prevMonthDayClass = isMultiMonth ? "prevMonthDay hidden" : "prevMonthDay", nextMonthDayClass = isMultiMonth ? "nextMonthDay hidden" : "nextMonthDay";
             var dayNumber = prevMonthDays + 1 - firstOfMonth, dayIndex = 0;
             // prepend days from the ending of previous month
             for (; dayNumber <= prevMonthDays; dayNumber++, dayIndex++) {
