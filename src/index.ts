@@ -832,9 +832,9 @@ function FlatpickrInstance(
     const firstOfMonth =
       (new Date(year, month, 1).getDay() - self.l10n.firstDayOfWeek + 7) % 7;
 
-    const prevMonthDays = self.utils.getDaysInMonth((month - 1 + 12) % 12);
+    const prevMonthDays = self.utils.getDaysInMonth((month - 1 + 12) % 12, year);
 
-    const daysInMonth = self.utils.getDaysInMonth(month),
+    const daysInMonth = self.utils.getDaysInMonth(month, year),
       days = window.document.createDocumentFragment(),
       isMultiMonth = self.config.showMonths > 1,
       prevMonthDayClass = isMultiMonth ? "prevMonthDay hidden" : "prevMonthDay",
@@ -2204,6 +2204,7 @@ function FlatpickrInstance(
   function redraw() {
     if (self.config.noCalendar || self.isMobile) return;
 
+    buildMonthSwitch();
     updateNavigationCurrentMonth();
     buildDays();
   }
@@ -2349,7 +2350,7 @@ function FlatpickrInstance(
     }
 
     self.redraw();
-    updateValue(false);
+    updateValue(true);
   }
 
   function setSelectedDate(
@@ -2412,7 +2413,7 @@ function FlatpickrInstance(
       self.selectedDates[self.selectedDates.length - 1];
 
     self.redraw();
-    jumpToDate();
+    jumpToDate(undefined, triggerChange);
 
     setHoursFromDate();
     if (self.selectedDates.length === 0) {
